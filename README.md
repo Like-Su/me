@@ -16,12 +16,6 @@ src="https://capsule-render.vercel.app/api?type=venom&color=gradient&height=230&
   </a>
 </p>
 
-<br/>
-
-> **保持好奇，持续构建。**
->
-> **不仅学习如何使用技术，更希望理解技术背后的原理。**
-
 </div>
 
 ---
@@ -29,8 +23,6 @@ src="https://capsule-render.vercel.app/api?type=venom&color=gradient&height=230&
 # 📚 技术文章
 
 <div align="center">
-
-> 记录学习、实践、源码分析、问题解决以及技术思考。
 
 <br/>
 
@@ -66,10 +58,6 @@ src="https://capsule-render.vercel.app/api?type=venom&color=gradient&height=230&
 src="https://skillicons.dev/icons?i=html,css,js,ts,vue,react,vite,webpack,nodejs,nestjs,express,postgres,mysql,redis,prisma,docker,linux,nginx,git,github"
 />
 
-<br/><br/>
-
-<sub>用于构建项目、验证想法和解决实际问题。</sub>
-
 </div>
 
 ---
@@ -77,8 +65,6 @@ src="https://skillicons.dev/icons?i=html,css,js,ts,vue,react,vite,webpack,nodejs
 # 🚀 精选项目
 
 <div align="center">
-
-> **通过真实项目学习技术，通过工程实践验证设计。**
 
 </div>
 
@@ -99,18 +85,6 @@ src="https://streak-stats.demolab.com/?user=Like-Su&hide_border=true&theme=trans
 </div>
 
 ---
-
-### 保持构建 · 保持学习 · 保持思考
-
-<br/>
-
-<a href="https://github.com/Like-Su/me">
-
-**📚 阅读我的技术文章 →**
-
-</a>
-
-  
 
 <a href="https://github.com/Like-Su">
 
