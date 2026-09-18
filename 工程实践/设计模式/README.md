@@ -1,4 +1,6 @@
 # 设计模式
+> https://facebookarchive.github.io/flux/docs/in-depth-overview
+本例采用 C++/Java/TS 来作演示, 分别对应 静态类型语言 + 动态语言进行演示
 
 ## 什么是设计模式?
 
