@@ -60,6 +60,7 @@ src="https://capsule-render.vercel.app/api?type=waving&color=0:fdf2f8,50:e0e7ff,
     <td align="center" width="200">
       <b>🫧 AI</b><br/><br/>
       <a href="./AIAgent">AI Agent / LLM / RAG</a>
+      <a href="./AIAgent/VibeCoding/">VibeCode</a>
     </td>
   </tr>
 </table>
