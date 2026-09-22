@@ -4,7 +4,7 @@ Array.prototype.myMap = function(callbackFn, thisArg) {
   const ret = [];
 
   for(let i = 0; i < this.length; i++) {
-    ret.push(callbackFn.call(self, this[i]));
+    ret.push(callbackFn.apply(self, [this[i], i, this]));
   }
 
   return ret;
