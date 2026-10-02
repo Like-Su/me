@@ -1,5 +1,10 @@
 # 🤖 AI Agent / LLM / RAG
-
+> LearnClaudeCode: https://github.com/shareAI-lab/learn-claude-code
+> Agno: https://docs.agno.com/
+> AgenticDesignPatterns: https://github.com/xindoo/agentic-design-patterns
+> AIAgentBook: https://github.com/bojieli/ai-agent-book
+> HelloAgent: https://github.com/datawhalechina/hello-agents
+> 深入理解AIAgent: https://bojieli.github.io/ai-agent-book/
 > 记录人工智能应用开发过程，探索大语言模型、Agent 和知识增强系统。
 
 ---
@@ -11,5 +16,6 @@
 | LLM     | 大语言模型基础 |
 | Prompt  | 提示词工程     |
 | RAG     | 检索增强生成   |
+| Harness     | 检索增强生成   |
 | Agent   | 智能体设计     |
 | AI 应用 | AI 产品实践    |
