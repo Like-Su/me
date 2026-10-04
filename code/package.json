@@ -1,0 +1,23 @@
+{
+  "name": "Vue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.34.5",
+  "dependencies": {
+    "express": "^5.2.1",
+    "global": "^4.4.0",
+    "jsonuri": "^4.0.1",
+    "vue-template-compiler": "^2.7.16"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "dotenv": "^18.0.5"
+  }
+}

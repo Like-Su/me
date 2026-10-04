@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PictureCard · AI 图片单词分析</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #1e1a16;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      font-size: 0.85rem;
+      background: linear-gradient(180deg, rgb(235, 189, 161) 0%, rgb(71, 49, 32) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #selecteImage {
+      display: none;
+    }
+
+    .output {
+      margin-top: 20px;
+      width: 80%;
+      text-align: center;
+      font-weight: bold;
+      z-index: 5;
+    }
+
+    button {
+      padding: 0 10px;
+      margin-left: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .details {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.2s;
+    }
+
+    .details button {
+      background-color: black;
+      color: white;
+      width: 160px;
+      height: 32px;
+      border-radius: 8px 8px 0 0;
+      border: none;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .details button:hover {
+      background-color: #222;
+    }
+
+    .details .fold {
+      width: 200px;
+      height: 30px;
+      background-color: white;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+    }
+
+    .details .expand {
+      width: 200px;
+      height: 88vh;
+      background-color: white;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      overflow-y: auto;
+      padding: 12px 0 20px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.2);
+    }
+
+    .expand::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .expand::-webkit-scrollbar-thumb {
+      background: #bbb;
+      border-radius: 8px;
+    }
+
+    .expand img {
+      width: 60%;
+      margin-top: 20px;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .expand .explaination {
+      color: black;
+      font-weight: normal;
+      width: 100%;
+      text-align: left;
+    }
+
+    .expand .explaination p {
+      margin: 0 10px 10px 10px;
+      line-height: 1.4;
+    }
+
+    .expand .reply {
+      color: black;
+      font-weight: normal;
+      margin-top: 20px;
+      width: 100%;
+      text-align: left;
+    }
+
+    .expand .reply p {
+      padding: 4px 10px;
+      margin: 0 10px 10px 10px;
+      border-radius: 6px;
+      border: solid 1px grey;
+      background: #f9f9f9;
+    }
+
+    .picture-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+      width: 80%;
+      max-width: 320px;
+    }
+
+    .picture-card .word-display {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #fff6e6;
+      text-shadow: 2px 2px 0 #3a2c1e, 4px 4px 0 rgba(0,0,0,0.3);
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+      min-height: 4rem;
+      word-break: break-word;
+      text-align: center;
+    }
+
+    .picture-card .upload-area {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      border: 3px dashed #ffffffaa;
+      border-radius: 24px;
+      padding: 20px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .picture-card .upload-area:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: #fff;
+    }
+
+    .picture-card .upload-area img {
+      max-width: 100%;
+      max-height: 180px;
+      border-radius: 12px;
+      object-fit: contain;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .picture-card .upload-placeholder {
+      font-size: 1.1rem;
+      color: #ffe8d4;
+      font-weight: 600;
+      text-shadow: 0 2px 4px black;
+    }
+
+    .hint {
+      color: #efe0d0;
+      margin-top: 12px;
+      font-size: 0.75rem;
+      opacity: 0.8;
+      text-align: center;
+      padding: 0 10px;
+    }
+
+    /* 加载中的状态提示 */
+    .loading-status {
+      color: #fff6e6;
+      font-size: 0.9rem;
+      margin-top: 8px;
+      text-align: center;
+      font-weight: normal;
+      text-shadow: 0 1px 3px black;
+      min-height: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- PictureCard 区域 -->
+    <div class="picture-card">
+      <div class="word-display" id="wordDisplay">请上传图片</div>
+      <div class="upload-area" id="uploadArea">
+        <img id="previewImg" src="" alt="预览" style="display: none;" />
+        <div class="upload-placeholder" id="uploadPlaceholder">📸 点击上传图片</div>
+      </div>
+      <input type="file" id="selecteImage" accept="image/*" />
+      <div class="hint">上传图片，AI 会识别一个英文单词</div>
+      <div class="loading-status" id="loadingStatus"></div>
+    </div>
+
+    <!-- 输出区域 -->
+    <div class="output">
+      <div id="sentenceDisplay"></div>
+    </div>
+
+    <!-- 详情折叠区 -->
+    <div class="details" id="detailsContainer">
+      <button id="toggleDetailBtn">Talk about it</button>
+      <div class="fold" id="foldPanel"></div>
+      <!-- expand 面板会动态生成/隐藏 -->
+    </div>
+  </div>
+
+  <script type="module" src="./6.Agent_CaptureTheWord.js"></script>
+</body>
+</html>
