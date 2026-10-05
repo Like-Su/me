@@ -1,1 +1,6 @@
 _template/*
+
+.env
+config.*
+
+node_modules
