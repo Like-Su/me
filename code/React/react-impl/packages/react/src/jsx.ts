@@ -81,5 +81,5 @@ export const jsxDEV = function (type: ElmentType, config: any): ReactElementType
     }
   }
 
-  return ReactElement(type, key, ref, props);
+  return ReactElement(type, key, ref, props)
 };
