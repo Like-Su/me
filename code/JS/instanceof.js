@@ -52,3 +52,15 @@ function _instanceof(instance, Constructor) {
 // 实例.__proto__ === 类.prototype
 console.log(_instanceof([], Array))
 console.log(_instanceof([], Object))
+
+// https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/Symbol.hasInstance
+// 设置 instanceof 行为
+class Obj {
+  static [Symbol.hasInstance](value) {
+    // console.log(value)
+    return this === value;
+  }
+}
+
+console.log(new Obj instanceof Obj)
+// console.log(Function.prototype[Symbol.hasInstance].call(Obj, new Obj)) // false

@@ -4,3 +4,5 @@ _template/*
 config.*
 
 node_modules
+
+.vscode
