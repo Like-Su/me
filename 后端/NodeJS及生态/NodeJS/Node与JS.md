@@ -50,6 +50,7 @@ CommonJS 最初为了除 浏览器之外的运行环境建立模块规范, 最�
 
 4. ESM(ECMAScript Modules)
 上面的这些模块规范都是 社区以及第三方规范, 并不是官方规范,而ESM就是 ECMAScript 官方模块机制, 该模块机制被内置到 JS 中无需引用外部模块实现机制, ![ESM 首次在 ES6 中提出](https://262.ecma-international.org/6.0/#sec-modules) 它的设计非常简单 通过 `import/export/export default` 等关键字来进行导入导出, 只要宿主有实现那么该语法即可使用, 现代浏览器大多都支持该写法 包括 NodeJS 也在推荐官方的 ESM
+![](../images/nodejs/2.JavaScript-modules.png)
 
 5. Node 识别 CJS 和 ESM
 通常 `*.mjs` 会被认为是 ESM, `*.cjs` 会被判定为 CJS, 若是普通的 `*.js` 则通过 `package.json` 的 `type` 字段来判断是哪一个模块类型的, 还有一个情况就是通过 `--eval` 参数启动 `node` 时 其中源码对应的 `--input-type` 参数是 commonjs 还是 esm 默认为 commonjs
@@ -85,3 +86,4 @@ import('./__test__/math2.mjs').then(math => {
 - CJS 要加载 ESM 有一个办法就是 通过 动他 `import()`
 
 ### NodeJS CommonJS 模块本质解析
+
