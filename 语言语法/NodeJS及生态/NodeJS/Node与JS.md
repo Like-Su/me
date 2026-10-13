@@ -137,6 +137,113 @@ node --inspect-brk 1.js
 
 在这我们先在要添加断点的代码行点击一下, 最后运行即可
 ![](../images/nodejs/12.debugger.png)
+#### Node 其他调试方法
+1. 字段讲解
+- processId 连接 processId 调试
+- program 调试的 node 代码
+  - args
+- runtimeExecutable 执行命令(从 PATH 中查找)
+  - runtimeArgv
+- skipFiles 跳过文件
+- stopOnEntry 是否首行断住
+- autoAttachChildProcesses (是否支持 child process)
+- console 设置 输出 地点(内外部 terminal, debug console)
+- cwd 设置工作目录
+- env 设置 env 环境
+- envFile 设置 env 文件
+- presentation 对调试配置做分组或排序
+```json
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    // Attach
+    // 连接 ws 服务端
+    {
+      "name": "Attach",
+      "port": 9229,
+      "request": "attach",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    }
+
+    // Attach by Process ID
+    // 通过 进程 id 来连接服务端
+    {
+      "name": "Attach by Process ID",
+      "processId": "${command:PickProcess}",
+      "request": "attach",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "type": "node"
+    }
+
+    // Launch Program 通过
+    {
+      "name": "Launch Program",
+      "program": "${workspaceFolder}/code/nodejs/debugger/3.js",
+      "request": "launch",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      // 运行命令的方式 (node | npm ...) 从 环境变量 PATH 中搜索
+      "runtimeExecutable": "ts-node",
+      // 添加参数
+      "args": [
+        "-a",
+        "-b",
+      ],
+      "type": "node"
+    },
+
+    // pnpm 运行
+    {
+      "name": "Launch via pnpm",
+      "request": "launch",
+      "runtimeArgs": [
+        "ts-node"
+      ],
+      "runtimeExecutable": "pnpm",
+      // 跳过文件
+      "skipFiles": [
+        // 跳过 node 内部文件
+        "<node_internals>/**"
+      ],
+      // 首行断住
+      "stopOnEntry": true,
+      "type": "node",
+      // 打开系统 terminal 展示
+      // "console": "externalTerminal",
+      // 内置 terminal 打印
+      // "console": "integratedTerminal",
+      // 内置 debug console 面板
+      // "console": "internalConsole",
+      // 是否检测子进程
+      // "autoAttachChildProcesses": true
+      // 设置工作目录
+      "cwd": "${workspaceFolder}",
+      // 设置环境变量
+      "env": {
+        "a": "1",
+        "b": "2"
+      },
+      // 设置环境变量 文件
+      "envFile": "${workspaceFolder}/.env",
+      // 分组排序设置(每个 配置都可以设置)
+      "presentation": {
+        "hidden": false,
+        "group": "调试 node",
+        "order": 1
+      }
+    },
+  ]
+}
+```
 
 
 ### 调试原理
@@ -148,4 +255,4 @@ NodeJS 是基于 V8 的, V8 本身就有调试协议 V8 Debug Protocol 所以早
 
 现在我们直到 其实就是 服务端和客户端相互连接, 基于调试协议完成不同功能 其他语言原理亦是如此
 
-一个编辑器如何支持多种调试协议呢? 比如 VsCode, VsCode 并没有实现所有协议而是通过 **DPA(Debugger adpater Protocol) 调试适配协议** 来适配到各种调试协议上, 比如 Node 将调试协议改为 ChromeDevToolsProtocol 后实现一个 DAP 的 adapter 即可对接到VSCode 中, 这就是 **适配器模式** 的魅力
+一个编辑器如何支持多种调试协议呢? 比如 VsCode, VsCode 并没有实现所有协议而是通过 **DPA(Debugger adpater Protocol) 调试适配协议** 来适配到各种调试协议上, 比如 Node 将调试协议改为 ChromeDevToolsProtocol 后实现一个 DAP 的 adapter 即可对接到VSCode 中, 这就是 **设计模式 适配器模式** 的魅力
