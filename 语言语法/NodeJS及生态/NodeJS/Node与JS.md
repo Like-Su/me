@@ -89,3 +89,63 @@ import('./__test__/math2.mjs').then(math => {
 
 
 ## Node 调试方法
+调试 和 打印本质区别: 调试可以获取的信息量和打印获取的信息量是不同的, 调试可以看到代码的完整调用栈(既 执行路径)/用到的数据/作用域和作用域链 等信息 而 打印只能获取结果, 在你使用 框架时候 你想要看到框架执行路径那么 调试将是最好的选择. 当你熟悉调试会对代码运行流程越来越清晰相信你会 喜欢上 Debugger 的过程
+
+### Node Chrome Debugger
+我们就来简单的来走一下 通过 Chrome DevTools 来对 Node 进行 debugger 的流程
+
+```js
+// 1.js
+const fs = require('node:fs');
+const path = require('node:path');
+
+const content = fs.readFileSync(path.join(path.resolve(__dirname), '..', 'eventEmitter/index.js'), { encoding: 'utf-8' })
+```
+
+运行下面的命令
+```shell
+node --inspect-brk 1.js
+```
+
+可以看到通过 webSocket 协议 来创建的 debugger 服务端 和 DevTools Client 连接的方式
+![](../images/nodejs/3.debugger.png)
+
+打开浏览器进入 `chrome://inspect` 中 添加 debugger 服务端地址
+![](../images/nodejs/4.debugger.png)
+
+最后点击 inspect 就可以进入调试页面
+![](../images/nodejs/5.debugger.png)
+
+![](../images/nodejs/6.debugger.png)
+
+
+### Node VsCode Debugger
+首先我们需要创建一个 `launch.json`
+![](../images/nodejs/7.debugger.png)
+
+添加一个 node 类型的 attach
+![](../images/nodejs/8.debugger.png)
+
+修改端口和 我们使用 `node inspect-brk` 相同的端口
+![](../images/nodejs/9.debugger.png)
+
+最后启动一下即可调试
+![](../images/nodejs/10.debugger.png)
+
+先通过 `node --inspect-brk` 来将服务跑起来 在创建 `attach.json` 步骤较为麻烦, 我们还有其他 `debugger` 方法, 通过在 `attach.json` 添加配置来自动化该流程
+![](../images/nodejs/11.debugger.png)
+
+在这我们先在要添加断点的代码行点击一下, 最后运行即可
+![](../images/nodejs/12.debugger.png)
+
+
+### 调试原理
+VsCodeDebugger 和 Chrome DevTools 它们只是一个对接 node 调试协议 的工具, 正因为有 **标准协议** 才会出现那么多的 调试工具, 标准化是世界趋势 不管在 任何行业 都是至关重要的的一环, 当然 标准化 在不同领域所以解决的问题不同. 但是它们都有一个目标就是 减少成本
+
+NodeJS 是基于 V8 的, V8 本身就有调试协议 V8 Debug Protocol 所以早期 NodeJS 调试协议也是 V8 Debug Protocol, 早期调试是通过 `node debug <filepath>` 来打断点的, 通过 `run/cont/next/setp` 命令实现 调试, 这样调试是非常耗时费劲的, 所以 Node 就看向 ChromeDevTools 通过它来调试, 但是 Chrome DevToolsProtocol 和 V8 Debug Protocol 是不同的调试协议 它的解决方案就是通过 中间层 来进行 协议转换
+
+所以你可以看到 npmjs.org 有一个包叫做 `node-inspector` 转换的, 后期NodeJS开发者觉得较为麻烦所以通过 提PR 将 V8 Inspector 即成到 NodeJS 中, 这个V8 Inspector 就是 Blink 内 Chrome DevTools Protocol 支持的部分(这部分是 V8 团队完成) 明显可以看出 上层服务依赖于下层建筑. 成熟后去除 `node debug` 后 `node-inspect` 就 推出历史舞台 改为 `node inspect` 启动 websocket 调试服务通过 `node --inspect | node --inspect-brk`
+
+现在我们直到 其实就是 服务端和客户端相互连接, 基于调试协议完成不同功能 其他语言原理亦是如此
+
+一个编辑器如何支持多种调试协议呢? 比如 VsCode, VsCode 并没有实现所有协议而是通过 **DPA(Debugger adpater Protocol) 调试适配协议** 来适配到各种调试协议上, 比如 Node 将调试协议改为 ChromeDevToolsProtocol 后实现一个 DAP 的 adapter 即可对接到VSCode 中, 这就是 **适配器模式** 的魅力
