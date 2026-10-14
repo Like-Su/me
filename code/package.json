@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "ts-node": "ts-node"
   },
@@ -15,11 +15,13 @@
     "express": "^5.2.1",
     "global": "^4.4.0",
     "jsonuri": "^4.0.1",
+    "source-map": "0.6.0",
     "ts-node": "^10.9.2",
     "vue-template-compiler": "^2.7.16"
   },
   "devDependencies": {
     "@types/node": "^26.6.4",
-    "dotenv": "^18.0.5"
+    "dotenv": "^18.0.5",
+    "typescript": "^7.0.2"
   }
 }
