@@ -17,6 +17,9 @@ importers:
       jsonuri:
         specifier: ^4.0.1
         version: 4.0.1
+      rxjs:
+        specifier: ^7.8.2
+        version: 7.8.2
       source-map:
         specifier: 0.6.0
         version: 0.6.0
@@ -443,6 +446,9 @@ packages:
     resolution: {integrity: sha512-nLTrUKm2UyiL7rlhapu/Zl45FwNgkZGaCpZbIHajDYgwlJCOzLSk+cIPAnsEqV955GjILJnKbdQC1nVPz+gAYQ==}
     engines: {node: '>= 18'}
 
+  rxjs@7.8.2:
+    resolution: {integrity: sha512-dhKf903U/PQZY6boNNtAGdWbG85WAbjT/1xYoZIC7FAY0yWapOBQVsVrDl58W86//e1VpMNBtRV4MaXfdMySFA==}
+
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
@@ -498,6 +504,9 @@ packages:
         optional: true
       '@swc/wasm':
         optional: true
+
+  tslib@2.8.1:
+    resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
   type-is@2.1.0:
     resolution: {integrity: sha512-faYHw0anBbc/kWF3zFTEnxSFOAGUX9GFbOBthvDdLsIlEoWOFOtS0zgCiQYwIskL9iGXZL3kAXD8OoZ4GmMATA==}
@@ -878,6 +887,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  rxjs@7.8.2:
+    dependencies:
+      tslib: 2.8.1
+
   safer-buffer@2.1.2: {}
 
   send@1.2.1:
@@ -958,6 +971,8 @@ snapshots:
       typescript: 7.0.2
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
+
+  tslib@2.8.1: {}
 
   type-is@2.1.0:
     dependencies:

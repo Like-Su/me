@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>worker performance optimization</title>
+</head>
+
+<body>
+  <script>
+    // 大量逻辑运算
+    function calc() {
+      let total = BigInt(0);
+      for (let i = 0; i < 1e8; i++) {
+
+        total += BigInt(i);
+      }
+      return total
+    }
+
+    document.write(calc());
+  </script>
+</body>
+
+</html>
