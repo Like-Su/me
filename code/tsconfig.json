@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "types": [ "node" ],
-    "target": "es2016", 
+    "target": "esnext", 
     "module": "NodeNext", 
     "moduleResolution": "NodeNext",
     "esModuleInterop": true,
@@ -10,6 +10,7 @@
     "strict": true,
     "skipLibCheck": true,
     // 生产 sourcemap
-    "sourceMap": true
+    "sourceMap": true,
+    "allowImportingTsExtensions": true
   }
 }

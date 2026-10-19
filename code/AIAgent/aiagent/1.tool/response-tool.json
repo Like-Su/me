@@ -1,0 +1,73 @@
+{
+  "lc": 1,
+  "type": "constructor",
+  "id": [
+    "langchain_core",
+    "messages",
+    "AIMessage"
+  ],
+  "kwargs": {
+    "id": "01a148e1cd73f92c3c386245e302f260",
+    "content": "",
+    "additional_kwargs": {
+      "tool_calls": [
+        {
+          "index": 0,
+          "id": "01a148e1d0d04ece13b8b97a9712a8b9",
+          "type": "function",
+          "function": {
+            "name": "read_file",
+            "arguments": "{\"filePath\": \"./2.tool.mts\"}"
+          }
+        }
+      ],
+      "reasoning_content": "The user wants me to read the file ./2.tool.mts and explain the code. Let me read it."
+    },
+    "response_metadata": {
+      "tokenUsage": {
+        "promptTokens": 376,
+        "completionTokens": 68,
+        "totalTokens": 444
+      },
+      "finish_reason": "tool_calls",
+      "model_provider": "openai",
+      "model_name": "deepseek-ai/DeepSeek-V4.1-Flash",
+      "usage": {
+        "prompt_tokens": 376,
+        "completion_tokens": 68,
+        "total_tokens": 444,
+        "completion_tokens_details": {
+          "reasoning_tokens": 25
+        },
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 376
+      }
+    },
+    "type": "ai",
+    "tool_calls": [
+      {
+        "name": "read_file",
+        "args": {
+          "filePath": "./2.tool.mts"
+        },
+        "type": "tool_call",
+        "id": "01a148e1d0d04ece13b8b97a9712a8b9"
+      }
+    ],
+    "invalid_tool_calls": [],
+    "usage_metadata": {
+      "output_tokens": 68,
+      "input_tokens": 376,
+      "total_tokens": 444,
+      "input_token_details": {
+        "cache_read": 0
+      },
+      "output_token_details": {
+        "reasoning": 25
+      }
+    }
+  }
+}

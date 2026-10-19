@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <title>iframe 流演示</title>
+</head>
+
+<body>
+  <h2>iframe 流式通信</h2>
+
+  <button id="start">开始接收</button>
+  <button id="stop">停止接收</button>
+
+  <hr>
+
+  <input id="message" placeholder="输入要推送的消息">
+  <button id="send">发送消息</button>
+
+  <h3>接收记录</h3>
+  <ul id="logs"></ul>
+
+  <script>
+    let iframe = null
+
+    // 供 iframe 中的脚本调用
+    window.onStreamMessage = function (message) {
+      const li = document.createElement('li')
+      li.textContent = message
+      document.querySelector('#logs').appendChild(li)
+    }
+
+    // 开始接收流
+    document.querySelector('#start').onclick = () => {
+      if (iframe) return
+
+      iframe = document.createElement('iframe')
+      iframe.hidden = true
+      iframe.src = '/iframe-stream'
+      document.body.appendChild(iframe)
+    }
+
+    // 停止接收流：移除 iframe 会关闭对应请求
+    document.querySelector('#stop').onclick = () => {
+      iframe?.remove()
+      iframe = null
+    }
+
+    // 请求服务端广播消息
+    document.querySelector('#send').onclick = async () => {
+      const input = document.querySelector('#message')
+      const message = input.value.trim()
+
+      if (!message) return
+
+      try {
+        const res = await fetch('/send', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ message })
+        })
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+
+        input.value = ''
+      } catch (error) {
+        console.error('发送失败:', error)
+      }
+    }
+  </script>
+</body>
+
+</html>

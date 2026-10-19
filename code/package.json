@@ -12,15 +12,20 @@
   "license": "ISC",
   "packageManager": "pnpm@10.34.5",
   "dependencies": {
+    "@langchain/core": "^1.2.18",
+    "@langchain/openai": "^1.6.2",
+    "@types/cors": "^2.8.19",
     "express": "^5.2.1",
     "global": "^4.4.0",
     "jsonuri": "^4.0.1",
     "rxjs": "^7.8.2",
     "source-map": "0.6.0",
     "ts-node": "^10.9.2",
-    "vue-template-compiler": "^2.7.16"
+    "vue-template-compiler": "^2.7.16",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@types/express": "^5.0.6",
     "@types/node": "^26.6.4",
     "dotenv": "^18.0.5",
     "typescript": "^7.0.2"
