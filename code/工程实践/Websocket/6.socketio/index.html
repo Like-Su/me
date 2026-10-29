@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket.IO Demo</title>
+</head>
+
+<body>
+  <h1>Socket.IO 新闻频道</h1>
+
+  <input id="message" placeholder="请输入消息">
+  <button id="send">发送消息</button>
+
+  <!-- Socket.IO 默认客户端脚本 -->
+  <script src="/socket/socket.js"></script>
+
+  <script>
+    // 连接 /news 命名空间
+    const socket = io('/news')
+
+    socket.on('connect', () => {
+      console.log('[client] connected:', socket.id)
+      console.log('hello')
+    })
+
+    // 接收服务端发送的消息
+    socket.on('message', (msg) => {
+      console.log('[client] receive:', msg)
+    })
+
+    socket.on('disconnect', (reason) => {
+      console.log('[client] disconnect:', reason)
+    })
+
+    // 发送消息
+    document.querySelector('#send').addEventListener('click', () => {
+      const input = document.querySelector('#message')
+      const msg = input.value.trim()
+
+      if (!msg) return
+
+      socket.send(msg)
+      input.value = ''
+    })
+  </script>
+</body>
+
+</html>
