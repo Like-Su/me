@@ -2,7 +2,6 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { execFile } from 'node:child_process'
 import { promisify } from 'node:util'
-import { DatabaseSync } from 'node:sqlite'
 import { z } from 'zod'
 
 

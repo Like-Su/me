@@ -14,7 +14,10 @@
   "dependencies": {
     "@ant-design/pro-components": "^2.8.10",
     "@langchain/core": "^1.2.18",
+    "@langchain/mcp-adapters": "^2.0.1",
     "@langchain/openai": "^1.6.2",
+    "@modelcontextprotocol/client": "^2.4.0",
+    "@modelcontextprotocol/server": "^2.4.0",
     "@types/cors": "^2.8.19",
     "@types/ws": "^8.18.2",
     "@umijs/max": "^4.7.27",
