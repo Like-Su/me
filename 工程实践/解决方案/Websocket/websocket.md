@@ -47,10 +47,10 @@
 - [后端实现](../../../code/工程实践/Websocket/3.ifream/app.mts)
 
 
-
 ### EventSource
 
 1. 实现: 服务端需要将 事件流设置为 `text/event-stream`, 编码设置为 UTF8, 每个消息通过 `\n` 作为分隔
+  - 缺陷: 不能跨域
 2. 代码实现
 
 - [前端实现](../../../code/工程实践/Websocket/4.eventSource/index.html)
@@ -66,14 +66,51 @@
 
 - 全双工通讯技术, 属于应用层协议, 基于 TCP 传输协议复用 HTTP 握手通道
 
-1. 优劣:
+2. 优劣:
 
 - 优:
   - 全双工, 实时性强
   - 支持二进制
   - WS Client 和 Server 交换时 协议数据包头小
+3. 具体表现:
+
+- 前端 通过 `101` 状态码来标识切换协议
+![](20261020105321.png)
+
+- Request/Response Headers 关键请求头
+```shell
+# Request Headers
+# 升级协议(普通 HTTP 协议是 keep-alive 或 close)
+connection: Upgrade
+# 升级的协议是 websocket
+upgrade: websocket
+# 
+sec-websocket-extensions: permessage-deflate
+# 校验码
+sec-websocket-key: FvvkJ3jNZqkdLkiLz5VU0Q==
+# 协议版本号
+sec-websocket-version: 13
+
+# Response Headers
+# 升级协议
+connection: Upgrade
+# 校验成功
+sec-websocket-accept: Co/VXI/mrTNuRnzNqOPfCUvo+Jk=
+# 升级为 websocket
+upgrade: websocket
+```
+
+4. 实现
+- [后端使用实现](../../../code/工程实践/Websocket/5.ws/index.mts)
 
 
+5. 数据帧格式: [RFC 6445 定义 Websocket 协议标准](https://www.rfc-editor.org/info/rfc6455/#section-5.2)
+> https://websocket.xiniushu.com/introduction
+![](20261020132045.png)
 
 ## Websocket 应用
+WebSocket 常用于: 聊天/弹幕/股票/客服系统/游戏, 等实时性强的应用
+
+一般我们不会从头开始封装一个 socket, 而是使用现成的库来完成
+
 
