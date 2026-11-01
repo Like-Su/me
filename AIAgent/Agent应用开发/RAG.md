@@ -33,30 +33,33 @@ text                    vector
 我们最常见的方法就是 **余弦相似度（Cosine Similarity）**
 
 给定 A B 两个向量
-\$\$
-\[
-A=(a_1,a_2,\ldots,a_n)
-\]
 
+$$
+\mathbf{A} = (a_1, a_2, \ldots, a_n)
+$$
 
-\$\$
-\[
-B=(b_1,b_2,\ldots,b_n)
-\]
+$$
+\mathbf{B} = (b_1, b_2, \ldots, b_n)
+$$
+
 
 余弦相似度定义为
-\$\$
-\[
-\operatorname{sim}(A,B)=
-\frac{A\cdot B}{\|A\|\|B\|}
-\]
+
+$$
+\operatorname{sim}(A, B) = \frac{A \cdot B}{\|A\| \|B\|}
+$$
+
 
 其中 余弦相似度 衡量两个方向相似程度, 数值越高标识语义越接近
 
-\$\$
-\[
-A\cdot B=\sum_{i=1}^{n}a_i b_i
-\]
+
+
+两个向量的点积为 
+
+$$
+A \cdot B = \sum_{i=1}^{n} a_i b_i
+$$
+
 
 ![](../images/aiagent/9.svg)
 
@@ -72,7 +75,7 @@ console.log(cosineSimilarity(a, c)) // 0.3365416423575587
 console.log(cosineSimilarity(b, c)) // 0.3619495579759933
 ```
 
-4. RAG 完整数据流程
+1. RAG 完整数据流程
 - 离线流程 构建知识库(文档向量化是发生在 上传或更新文档时)
 ```
 PDF/Markdown/TXT/Word -> 文档解析与文本清洗 -> Chunking 文本切分 -> Embedding 模型向量化 -> Milvus/PG
