@@ -1,0 +1,11 @@
+{
+  "model": "Qwen/Qwen3-VL-Embedding-8B",
+  "collection": "book_cli_chunks",
+  "files": {
+    "实战Java虚拟机——JVM故障诊断与性能调优-试读.pdf": {
+      "bookId": "c5682c592875b7baf32d8867",
+      "hash": "2cc88a1e876205cd7c2588b3fa79c6af4d75d5470d4327431c4747ccce65a3bb",
+      "chunks": 122
+    }
+  }
+}

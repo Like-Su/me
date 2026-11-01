@@ -1,0 +1,13 @@
+{
+  "collection": "book_cli_chunks_v4",
+  "model": "Qwen/Qwen3-VL-Embedding-8B",
+  "pipelineVersion": "ebook-rag-v4",
+  "files": {
+    "RefactoringGuru 设计模式.epub": {
+      "bookId": "9c4573bc8d8ee20e3aee3da6",
+      "revision": "50a1c325f897052f91a1934941b2be70",
+      "title": "​RefactoringGuru 设计模式",
+      "chunks": 2346
+    }
+  }
+}
