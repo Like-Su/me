@@ -45,8 +45,9 @@ $$
 
 余弦相似度定义为
 
+
 $$
-\operatorname{sim}(A, B) = \frac{A \cdot B}{\|A\| \|B\|}
+sim(A, B) = \frac{A \cdot B}{\|A\| \|B\|}
 $$
 
 
